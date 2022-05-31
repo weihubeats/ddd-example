@@ -25,6 +25,7 @@
             <artifactId>ddd-app</artifactId>
             <version>${ddd-example-version}</version>
         </dependency>
+        
     </dependencies>
 
 </project>

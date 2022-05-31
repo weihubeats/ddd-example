@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.weihubeats</groupId>
-            <artifactId>ddd-domain</artifactId>
+            <artifactId>ddd-component</artifactId>
             <version>${ddd-example-version}</version>
         </dependency>
     </dependencies>
