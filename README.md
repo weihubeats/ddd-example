@@ -12,7 +12,7 @@ DDD 分包分层规范及通用组件说明
 - rpc: 远程rpc调用
 - component: 基础组件层
 
-> rpc层可以单独拆分一个模块出来,地位和infrastructure层一致，都是属于数据层，也可以直接放在地位和infrastructure层一致
+> rpc层可以单独拆分一个模块出来,地位和infrastructure层一致，都是属于数据层，也可以直接放在infrastructure层
 
 ### 为什么 app层可以直接越过领域层直达infrastructure
 
