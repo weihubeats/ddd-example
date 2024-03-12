@@ -36,6 +36,38 @@ DDD 分包分层规范及通用组件说明
 事件驱动不要使用`spring event`,会丢失事件
 推荐自研或者参考[event-bus-rocketmq-all](https://github.com/weihubeats/event-bus-rocketmq-all)
 
+### 分布式事务
+如果使用领域事件，必然存在分布式事务问题。
+存在两种选择
+1. 先发领域事件，后提交事务
+2. 先提交事务，后发领域事件
+
+推荐先提交事务后发领域事件
+有两种方式
+1. 发送延时消息
+2. 利用`TransactionSynchronizationManager`
+```java
+    @Transactional
+    public void createOrder() {
+        // 业务逻辑
+        // 发送领域事件
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+            @Override
+            public void afterCommit() {
+                // 发送领域事件
+            }
+        });
+    }
+```
+
+> 一般情况下我们认为领域事件发送失败概率比较小，所以我们可以先提交事务(事务提交失败概率会大一点，比如业务逻辑导致的数据重复插入、数据异常插入失败等)，再发送领域事件
+
+领域事件发送的数据尽量不应该依赖于数据库。
+
+分布式事务我们可以不处理，如果处理推荐使用最终一致性
+
+
+
 ### 如何避免出现上帝聚合根
 
 上帝聚合根是指一个聚合根包含了所有的业务逻辑，这样的聚合根会变得非常臃肿，不利于维护和扩展。
