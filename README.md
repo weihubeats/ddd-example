@@ -23,6 +23,9 @@ DDD 分包分层规范及通用组件说明
 
 ### 编码规范
 
+#### 代码规范
+idea代码格式统一使用 [spring-boot-nebula style](https://github.com/weihubeats/spring-boot-nebula/blob/master/style/Intellij_nebula_Java_Conventions.xml)
+
 ### 事件驱动编程的重要性
 
 不同领域之间的通信我们都推荐使用事件通信。
