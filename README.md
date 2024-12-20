@@ -43,6 +43,18 @@ public class OrderController {
 }
 ```
 
+#### 参数校验
+
+参数校验禁止在`controller`层进行校验，应该在`service`层进行校验
+
+详细说明参考博客
+
+### 集成测试编写规范
+
+集成测试推荐使用`MockMvc`进行测试
+
+[参考博客](https://blog.csdn.net/qq_42651904/article/details/144418252?spm=1001.2014.3001.5501)
+
 ### 事件驱动编程的重要性
 
 不同领域之间的通信我们都推荐使用事件通信。
