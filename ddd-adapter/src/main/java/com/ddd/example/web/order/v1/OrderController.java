@@ -1,5 +1,7 @@
 package com.ddd.example.web.order.v1;
 
+import com.ddd.example.app.order.executor.OrderApplicationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController("/order/v1")
+@RequiredArgsConstructor
 public class OrderController {
+
+    private final OrderApplicationService orderApplicationService;
     
     
 }
