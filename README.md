@@ -47,7 +47,7 @@ public class OrderController {
 
 参数校验禁止在`controller`层进行校验，应该在`service`层进行校验
 
-详细说明参考博客
+详细说明参考博客[参数校验](https://blog.csdn.net/qq_42651904/article/details/144620951?sharetype=blogdetail&sharerId=144620951&sharerefer=PC&sharesource=qq_42651904&spm=1011.2480.3001.8118)
 
 ### 集成测试编写规范
 
