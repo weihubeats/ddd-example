@@ -1,5 +1,7 @@
 package com.ddd.example.infr.order.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ddd.example.infr.order.entity.OrderDO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @description:
  */
 @Repository
-public interface OrderMapper {
+public interface OrderMapper extends BaseMapper<OrderDO> {
 }

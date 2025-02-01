@@ -2,6 +2,8 @@ package com.ddd.example.web.order.v1;
 
 import com.ddd.example.app.order.executor.OrderApplicationService;
 import com.ddd.example.app.order.vo.OrderVO;
+import com.ddd.example.infr.order.queryentity.OrderQuery;
+import com.nebula.base.model.NebulaPageRes;
 import com.nebula.web.boot.annotation.NebulaResponseBody;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,15 @@ public class OrderController {
         return orderApplicationService.getOrderByUid(uid);
         
     }
+    
+    // 分页查询
+    @GetMapping
+    @NebulaResponseBody
+    public NebulaPageRes<OrderVO> getOrders(OrderQuery query) {
+        return orderApplicationService.getOrders(query);
+
+    }
+    
     
     
 }

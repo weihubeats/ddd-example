@@ -28,7 +28,7 @@
         <lombok.version>1.18.16</lombok.version>
         <xxl-job.version>2.3.0</xxl-job.version>
         <org.redisson.version>3.14.1</org.redisson.version>
-        <spring-boot-nebula.version>0.0.01</spring-boot-nebula.version>
+        <spring-boot-nebula.version>0.0.2</spring-boot-nebula.version>
 
 
     </properties>
@@ -65,6 +65,12 @@
             <dependency>
                 <groupId>io.github.weihubeats</groupId>
                 <artifactId>spring-boot-nebula-web</artifactId>
+                <version>${spring-boot-nebula.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.weihubeats</groupId>
+                <artifactId>spring-boot-nebula-mybatis</artifactId>
                 <version>${spring-boot-nebula.version}</version>
             </dependency>
             

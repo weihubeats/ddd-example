@@ -2,6 +2,7 @@ package com.ddd.example.app.order.converter;
 
 import com.ddd.example.app.order.vo.OrderVO;
 import com.ddd.example.infr.order.entity.OrderDO;
+import com.nebula.base.model.NebulaPageRes;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,13 @@ public class OrderAssembler {
     public static List<OrderVO> toOrderVOs(List<OrderDO> orderDOs) {
         return orderDOs.stream().map(OrderAssembler::toOrderDO).collect(Collectors.toList());
     }
+
+    public static NebulaPageRes<OrderVO> toOrderVOs(NebulaPageRes<OrderDO> orderDOs) {
+        List<OrderVO> orderVOS = orderDOs.getList().stream().map(OrderAssembler::toOrderDO).collect(Collectors.toList());
+        return NebulaPageRes.of(orderVOS, orderDOs.getTotalCount(), orderDOs.getPageSize());
+        
+    }
+
     
     public static OrderVO toOrderDO(OrderDO orderDO) {
         OrderVO orderVO = new OrderVO();
@@ -24,6 +32,6 @@ public class OrderAssembler {
         orderVO.setOrderStatus(orderDO.getOrderStatus());
         return orderVO;
     }
-    
+
 
 }
