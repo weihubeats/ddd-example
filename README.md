@@ -21,6 +21,70 @@ DDD 分包分层规范及通用组件说明
 ### 基础服务框架
 推荐使用[spring-boot-nebula](https://github.com/weihubeats/spring-boot-nebula)
 
+### mybatis plus编码规范
+
+mybatis plus代码生成器推荐使用 [mybatis-plus-generator](https://github.com/weihubeats/mybatis-plus-generator)
+
+就是不要将`mybatis plus`的`Warpper`暴露到`DAO`以外的层级，特别是`Service`层
+
+不然造成的后果就是`Warpper`在`Service`满天飞。然后有如下弊端
+
+1. `Service`层充满了数据查询的各种`Warpper`，逻辑不够解耦，导致应该在数据层的逻辑全部暴露在`Service`层
+2. `Service`层的数据查询没有封装无法复用
+
+所以我们一般使用`mybatis plus`的标准用法结构是
+
+- infra
+    - dao
+        - mapper
+            - OrderMapper.java
+        - impl
+            - OrderDAOImpl.java
+              OrderDAO.java
+    - entity
+        - OrderDO.java
+
+具体的代码如下：
+
+- OrderDO
+
+```java
+@Data
+public class OrderDO {
+
+}
+```
+
+- OrderMapper
+
+```java
+@Mapper
+public interface OrderMapper extends BaseMapper<OrderDO> {
+}
+```
+
+- OrderDAO
+
+```java
+public interface OrderDAO extends IService<OrderDO> {
+}
+```
+
+- OrderDAOImpl
+
+```java
+@Repository
+@RequiredArgsConstructor
+public class OrderDAOImpl extends ServiceImpl<OrderMapper, OrderDO> implements OrderDAO {
+
+    private final InfluhubOrderMapper influhub_orderMapper;
+}
+```
+
+### 缓存框架
+
+缓存框架推荐使用 [fluxcache](https://github.com/weihubeats/fluxcache)
+
 ### 编码规范
 
 #### 代码规范

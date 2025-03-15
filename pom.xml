@@ -6,6 +6,7 @@
     <groupId>io.github.weihubeats</groupId>
     <artifactId>ddd-example</artifactId>
     <version>1.0.0</version>
+    
     <modules>
         <module>ddd-adapter</module>
         <module>ddd-app</module>
@@ -13,7 +14,9 @@
         <module>ddd-domain</module>
         <module>ddd-infrastructure</module>
         <module>ddd-start</module>
+        <module>ddd-rpc</module>
     </modules>
+    
     <packaging>pom</packaging>
     <name>ddd-example</name>
 
@@ -29,8 +32,7 @@
         <xxl-job.version>2.3.0</xxl-job.version>
         <org.redisson.version>3.14.1</org.redisson.version>
         <spring-boot-nebula.version>0.0.2</spring-boot-nebula.version>
-
-
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
     </properties>
 
 
@@ -44,6 +46,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
