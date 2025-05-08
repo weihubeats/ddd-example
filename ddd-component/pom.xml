@@ -24,6 +24,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.weihubeats</groupId>
+            <artifactId>event-bus-rocketmq-apache-boot-starter</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>org.redisson</groupId>

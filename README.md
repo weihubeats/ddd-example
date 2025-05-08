@@ -1,4 +1,5 @@
 ### ddd-example
+
 DDD 分包分层规范及通用组件说明
 
 
@@ -132,6 +133,55 @@ public class OrderController {
 事件驱动不要使用`spring event`,会丢失事件
 推荐自研或者参考[event-bus-rocketmq-all](https://github.com/weihubeats/event-bus-rocketmq-all)
 
+#### 领域事件发送
+
+```java
+public class OrderMessage extends EventBusAbstractMessage {
+    
+    public static final String TAG = "order-tag";
+    
+    @Override
+    public String getTag() {
+        return TAG;
+    }
+}
+
+```
+
+```java
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@Validated
+public class OrderApplicationService {
+
+    private final DomainEventBus domainEventBus;
+
+
+    public boolean createOrder() {
+        // 下单成功 发送领域事件
+        OrderMessage orderMessage = new OrderMessage();
+        domainEventBus.sendMessage(orderMessage);
+        return true;
+    }
+}
+```
+
+#### 领域事件消费
+
+```java
+@EventBusConsumer(topic = MQConstants.DOMAIN_EVENT_TOPIC, groupId = MQConstants.GID_DOMAIN_EVENT)
+@Slf4j
+public class OrderEventHandle {
+
+    @EventBusListener(tag = OrderMessage.TAG)
+    public void test(TestMessage testMessage) {
+        String jsonString = JsonUtil.toJSONString(testMessage);
+        System.out.println("testMessage = " + jsonString);
+    }
+}
+```
+
 ### 分布式事务
 如果使用领域事件，必然存在分布式事务问题。
 存在两种选择
@@ -175,3 +225,5 @@ public class OrderController {
 2. 必须通过代理过的类从外部调用目标方法才生效
 3. 默认只有出现`RuntimeException`或者`Error`才会回滚。所以强制指定异常的回滚范围比如`@Transactional(rollbackFor = Exception.class)`
 4. 合理使用事务的传播行为
+
+### 接口设计规范

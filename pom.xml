@@ -33,6 +33,7 @@
         <org.redisson.version>3.14.1</org.redisson.version>
         <spring-boot-nebula.version>0.0.2</spring-boot-nebula.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <event-bus.version>0.0.1</event-bus.version>
     </properties>
 
 
@@ -53,6 +54,12 @@
                 <version>${spring-cloud.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.weihubeats</groupId>
+                <artifactId>event-bus-rocketmq-apache-boot-starter</artifactId>
+                <version>${event-bus.version}</version>
             </dependency>
 
 
