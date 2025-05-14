@@ -1,8 +1,8 @@
-package config;
+package com.ddd.example.component.config;
 
+import com.ddd.example.component.constants.MQConstants;
 import com.event.bus.rocketmq.boot.annotation.EventBusProducer;
 import com.event.bus.rocketmq.boot.core.EventBusRocketMQTemplate;
-import constants.MQConstants;
 
 /**
  * @author : wh

@@ -1,4 +1,4 @@
-package annotation;
+package com.ddd.example.component.annotation;
 
 import java.lang.annotation.*;
 

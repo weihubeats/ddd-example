@@ -8,7 +8,7 @@ import com.ddd.example.infr.order.queryentity.OrderQuery;
 import com.ddd.example.infr.order.querygateway.OrderGateway;
 import com.nebula.base.model.NebulaPageRes;
 import com.sun.istack.internal.NotNull;
-import config.DomainEventBus;
+import com.ddd.example.component.config.DomainEventBus;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

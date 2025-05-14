@@ -1,4 +1,4 @@
-package constants;
+package com.ddd.example.component.constants;
 
 /**
  * @author : wh

@@ -3,7 +3,7 @@ package com.ddd.example.app.order.event;
 import com.event.bus.rocketmq.boot.annotation.EventBusConsumer;
 import com.event.bus.rocketmq.boot.annotation.EventBusListener;
 import com.nebula.base.utils.JsonUtil;
-import constants.MQConstants;
+import com.ddd.example.component.constants.MQConstants;
 import lombok.extern.slf4j.Slf4j;
 
 /**

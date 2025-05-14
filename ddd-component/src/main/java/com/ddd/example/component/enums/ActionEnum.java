@@ -1,4 +1,4 @@
-package enums;
+package com.ddd.example.component.enums;
 
 /**
  * @author : wh

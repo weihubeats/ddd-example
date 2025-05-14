@@ -1,4 +1,4 @@
-package exception;
+package com.ddd.example.component.exception;
 
 /**
  * @author : wh
