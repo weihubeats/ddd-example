@@ -227,3 +227,7 @@ public class OrderEventHandle {
 4. 合理使用事务的传播行为
 
 ### 接口设计规范
+
+### 分支创建规范
+
+分支创建规范参考 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddd.example.infr.order.mapper.OrderMapper">
+    
+    <select id="getOrders" resultType="com.ddd.example.infr.order.entity.OrderDO">
+        select * from order
+        <where>
+            <if test="dto.phone != null">
+                and phone like CONCAT('%', #{dto.phone}, '%')
+            </if>
+            <if test=" dto.tag != null">
+                and #{dto.tag} = ANY(tags)
+            </if>
+            <if test="dto.tags != null and dto.tags.size() > 0">
+                AND tags @> ARRAY[
+                <foreach collection="dto.tags" item="tag" separator=",">
+                    #{tag}::text
+                </foreach>
+                ]::text[]
+            </if>
+            <if test="dto.platforms != null and dto.platforms.size() > 0">
+                AND sma.platform IN
+                <foreach collection="dto.platforms" item="platform" open="(" separator="," close=")">
+                    #{platform}
+                </foreach>
+            </if>
+            <if test="dto.createStartTime != null">
+                AND igc.create_time >= #{dto.createStartTime}
+            </if>
+            <if test="dto.createEndTime != null">
+                AND igc.create_time &lt;= #{dto.createEndTime}
+            </if>
+        </where>
+    </select>
+</mapper>

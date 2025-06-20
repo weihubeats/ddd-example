@@ -2,6 +2,9 @@ package com.ddd.example.infr.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ddd.example.infr.order.entity.OrderDO;
+import com.ddd.example.infr.order.queryentity.OrderQuery;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,4 +14,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrderMapper extends BaseMapper<OrderDO> {
+    
+    List<OrderDO> getOrders(@Param("dto") OrderQuery query);
+    
+    
+    
+    
 }

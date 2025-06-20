@@ -1,5 +1,8 @@
 package com.ddd.example.infr.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.nebula.mybatis.entity.BaseDO;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -8,7 +11,8 @@ import lombok.Data;
  * @description: 与数据库一一对应
  */
 @Data
-public class OrderDO {
+@TableName("order")
+public class OrderDO extends BaseDO {
 
     /**
      * 订单号
@@ -28,7 +32,14 @@ public class OrderDO {
     /**
      * 订单状态: 已下单,待审核(已付款),已审核,已取消,已关闭
      */
-    private Integer orderStatus;    
+    private Integer orderStatus;
+
+    /**
+     * 订单tag
+     */
+    private List<String> tags;
+    
+    private List<String> platforms;
     
     
     
