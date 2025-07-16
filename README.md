@@ -231,3 +231,33 @@ public class OrderEventHandle {
 ### 分支创建规范
 
 分支创建规范参考 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
+
+
+
+## 一些常用的查询
+
+### PG
+
+- 数组单条件查询
+
+存在某个标签
+
+```sql
+            <if test=" dto.tag != null">
+                and #{dto.tag} = ANY(tags)
+            </if>
+```
+
+- 数组多条件查询
+
+存在多个标签
+
+```sql
+            <if test="dto.tags != null and dto.tags.size() > 0">
+                AND tags @> ARRAY[
+                <foreach collection="dto.tags" item="tag" separator=",">
+                    #{tag}::text
+                </foreach>
+                ]::text[]
+            </if>
+```

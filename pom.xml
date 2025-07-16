@@ -31,7 +31,7 @@
         <lombok.version>1.18.16</lombok.version>
         <xxl-job.version>2.3.0</xxl-job.version>
         <org.redisson.version>3.14.1</org.redisson.version>
-        <spring-boot-nebula.version>0.0.4</spring-boot-nebula.version>
+        <spring-boot-nebula.version>0.0.6</spring-boot-nebula.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <event-bus.version>0.0.1</event-bus.version>
     </properties>
