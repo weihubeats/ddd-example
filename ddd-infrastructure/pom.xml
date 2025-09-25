@@ -14,20 +14,27 @@
     <name>ddd-infrastructure</name>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
     
     <dependencies>
+        
         <dependency>
             <groupId>io.github.weihubeats</groupId>
             <artifactId>ddd-domain</artifactId>
             <version>${ddd-example-version}</version>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.weihubeats</groupId>
+            <artifactId>spring-boot-nebula-mybatis</artifactId>
+        </dependency>
+        
     </dependencies>
 
 </project>

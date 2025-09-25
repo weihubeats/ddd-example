@@ -1,4 +1,4 @@
-package utlis;
+package com.ddd.example.component.utlis;
 
 /**
  * @author : wh

@@ -1,4 +1,4 @@
-package config;
+package com.ddd.example.component.config;
 
 /**
  * @author : wh

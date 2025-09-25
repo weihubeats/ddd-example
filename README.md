@@ -1,4 +1,5 @@
 ### ddd-example
+
 DDD 分包分层规范及通用组件说明
 
 
@@ -20,6 +21,70 @@ DDD 分包分层规范及通用组件说明
 
 ### 基础服务框架
 推荐使用[spring-boot-nebula](https://github.com/weihubeats/spring-boot-nebula)
+
+### mybatis plus编码规范
+
+mybatis plus代码生成器推荐使用 [mybatis-plus-generator](https://github.com/weihubeats/mybatis-plus-generator)
+
+就是不要将`mybatis plus`的`Warpper`暴露到`DAO`以外的层级，特别是`Service`层
+
+不然造成的后果就是`Warpper`在`Service`满天飞。然后有如下弊端
+
+1. `Service`层充满了数据查询的各种`Warpper`，逻辑不够解耦，导致应该在数据层的逻辑全部暴露在`Service`层
+2. `Service`层的数据查询没有封装无法复用
+
+所以我们一般使用`mybatis plus`的标准用法结构是
+
+- infra
+    - dao
+        - mapper
+            - OrderMapper.java
+        - impl
+            - OrderDAOImpl.java
+              OrderDAO.java
+    - entity
+        - OrderDO.java
+
+具体的代码如下：
+
+- OrderDO
+
+```java
+@Data
+public class OrderDO {
+
+}
+```
+
+- OrderMapper
+
+```java
+@Mapper
+public interface OrderMapper extends BaseMapper<OrderDO> {
+}
+```
+
+- OrderDAO
+
+```java
+public interface OrderDAO extends IService<OrderDO> {
+}
+```
+
+- OrderDAOImpl
+
+```java
+@Repository
+@RequiredArgsConstructor
+public class OrderDAOImpl extends ServiceImpl<OrderMapper, OrderDO> implements OrderDAO {
+
+    private final InfluhubOrderMapper influhub_orderMapper;
+}
+```
+
+### 缓存框架
+
+缓存框架推荐使用 [fluxcache](https://github.com/weihubeats/fluxcache)
 
 ### 编码规范
 
@@ -68,6 +133,55 @@ public class OrderController {
 事件驱动不要使用`spring event`,会丢失事件
 推荐自研或者参考[event-bus-rocketmq-all](https://github.com/weihubeats/event-bus-rocketmq-all)
 
+#### 领域事件发送
+
+```java
+public class OrderMessage extends EventBusAbstractMessage {
+    
+    public static final String TAG = "order-tag";
+    
+    @Override
+    public String getTag() {
+        return TAG;
+    }
+}
+
+```
+
+```java
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@Validated
+public class OrderApplicationService {
+
+    private final DomainEventBus domainEventBus;
+
+
+    public boolean createOrder() {
+        // 下单成功 发送领域事件
+        OrderMessage orderMessage = new OrderMessage();
+        domainEventBus.sendMessage(orderMessage);
+        return true;
+    }
+}
+```
+
+#### 领域事件消费
+
+```java
+@EventBusConsumer(topic = MQConstants.DOMAIN_EVENT_TOPIC, groupId = MQConstants.GID_DOMAIN_EVENT)
+@Slf4j
+public class OrderEventHandle {
+
+    @EventBusListener(tag = OrderMessage.TAG)
+    public void test(TestMessage testMessage) {
+        String jsonString = JsonUtil.toJSONString(testMessage);
+        System.out.println("testMessage = " + jsonString);
+    }
+}
+```
+
 ### 分布式事务
 如果使用领域事件，必然存在分布式事务问题。
 存在两种选择
@@ -111,6 +225,42 @@ public class OrderController {
 2. 必须通过代理过的类从外部调用目标方法才生效
 3. 默认只有出现`RuntimeException`或者`Error`才会回滚。所以强制指定异常的回滚范围比如`@Transactional(rollbackFor = Exception.class)`
 4. 合理使用事务的传播行为
+
+### 接口设计规范
+
+### 分支创建规范
+
+分支创建规范参考 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/)
+
+
+
+## 一些常用的查询
+
+### PG
+
+- 数组单条件查询
+
+存在某个标签
+
+```sql
+            <if test=" dto.tag != null">
+                and #{dto.tag} = ANY(tags)
+            </if>
+```
+
+- 数组多条件查询
+
+存在多个标签
+
+```sql
+            <if test="dto.tags != null and dto.tags.size() > 0">
+                AND tags @> ARRAY[
+                <foreach collection="dto.tags" item="tag" separator=",">
+                    #{tag}::text
+                </foreach>
+                ]::text[]
+            </if>
+```
 
 ## idea插件推荐
 [idea插件推荐.md](https://weihubeats.github.io/docs/java/idea/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6)

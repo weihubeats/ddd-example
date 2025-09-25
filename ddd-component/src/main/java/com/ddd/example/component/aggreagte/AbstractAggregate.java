@@ -1,4 +1,4 @@
-package aggreagte;
+package com.ddd.example.component.aggreagte;
 
 /**
  * @author : wh

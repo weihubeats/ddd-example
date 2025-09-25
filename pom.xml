@@ -6,6 +6,7 @@
     <groupId>io.github.weihubeats</groupId>
     <artifactId>ddd-example</artifactId>
     <version>1.0.0</version>
+    
     <modules>
         <module>ddd-adapter</module>
         <module>ddd-app</module>
@@ -13,7 +14,9 @@
         <module>ddd-domain</module>
         <module>ddd-infrastructure</module>
         <module>ddd-start</module>
+        <module>ddd-rpc</module>
     </modules>
+    
     <packaging>pom</packaging>
     <name>ddd-example</name>
 
@@ -28,12 +31,14 @@
         <lombok.version>1.18.16</lombok.version>
         <xxl-job.version>2.3.0</xxl-job.version>
         <org.redisson.version>3.14.1</org.redisson.version>
-
-
+        <spring-boot-nebula.version>0.0.6</spring-boot-nebula.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <event-bus.version>0.0.1</event-bus.version>
     </properties>
 
 
     <dependencyManagement>
+        
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -42,21 +47,53 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.weihubeats</groupId>
+                <artifactId>event-bus-rocketmq-apache-boot-starter</artifactId>
+                <version>${event-bus.version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>${org.redisson.version}</version>
             </dependency>
+            
             <dependency>
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.weihubeats</groupId>
+                <artifactId>spring-boot-nebula-web</artifactId>
+                <version>${spring-boot-nebula.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.weihubeats</groupId>
+                <artifactId>spring-boot-nebula-mybatis</artifactId>
+                <version>${spring-boot-nebula.version}</version>
+            </dependency>
+            
+            
         </dependencies>
         
 
