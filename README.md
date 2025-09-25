@@ -111,3 +111,27 @@ public class OrderController {
 2. 必须通过代理过的类从外部调用目标方法才生效
 3. 默认只有出现`RuntimeException`或者`Error`才会回滚。所以强制指定异常的回滚范围比如`@Transactional(rollbackFor = Exception.class)`
 4. 合理使用事务的传播行为
+
+## idea插件推荐
+[idea插件推荐.md](https://weihubeats.github.io/docs/java/idea/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6)
+
+
+## 研发常用软件安装
+
+- IntelliJ IDEA java编码最好用idea
+- GoLand golang编码软件
+- DataGrip 数据库管理软件
+- Postman 接口调试软件
+- Apifox 接口调试软件
+- Visual Studio Code 啥都能写
+- Xnip 截图软件
+- Tabby 终端软件
+- RedisInsight Redis可视化软件
+- prettyZoo Zookeeper可视化软件
+- Sublime Text 文本编辑器
+- mat java dump分析工具
+- Docker 容器软件
+- Charles 抓包软件
+- Beyond Compare 文件对比软件
+- uTools 各种小工具
+- Google Chrome 浏览器
